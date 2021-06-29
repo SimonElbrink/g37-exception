@@ -6,18 +6,22 @@ package se.lexicon.simon.data;
 public class PersonSequencer implements Sequencer {
 
     private static int sequencer;
-    private static PersonSequencer personSequencer;
 
+    private static final PersonSequencer INSTANCE;
+
+    //Static instantiation Block
     static{
-        personSequencer = new PersonSequencer();
+        INSTANCE = new PersonSequencer();
     }
 
+    //Private constructor
     private PersonSequencer(){
         sequencer = 0;
     }
 
+    //Getter for PersonSequencer instance = To access this single instance from anywhere.
     public static PersonSequencer getInstance(){
-        return personSequencer;
+        return INSTANCE;
     }
 
     @Override

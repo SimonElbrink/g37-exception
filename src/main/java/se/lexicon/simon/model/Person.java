@@ -12,12 +12,10 @@ public class Person {
     private String email;
     private LocalDate birthDate;
 
-    public Person(String name, String email, LocalDate birthDate) {
+    public Person(String name, String email) {
         this.id = PersonSequencer.getInstance().getNextInSequence();
-
+        setName(name);
         this.email = email;
-        this.name = name;
-        this.birthDate = birthDate;
     }
 
     public int getId() {
@@ -28,7 +26,21 @@ public class Person {
         return name;
     }
 
+    //Validating the input (name)
+    // not allowed to have a name with 1 letter.
+    // not allowed to have a name only Space (" ");
+    // not allowed to be "null"
     public void setName(String name) {
+        if (name == null){
+            throw new NullPointerException("Name was Null can't continue");
+        }
+
+        name = name.trim();
+
+        if (name.isEmpty() || name.length() < 2){
+            throw new IllegalArgumentException("Name need to be at least 2 letters long");
+        }
+
         this.name = name;
     }
 
@@ -45,6 +57,11 @@ public class Person {
     }
 
     public void setBirthDate(LocalDate birthDate) {
+
+        if (birthDate == null){
+            throw new NullPointerException("BirthDate Was null");
+        }
+
         this.birthDate = birthDate;
     }
 
